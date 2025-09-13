@@ -1,0 +1,51 @@
+{
+  "name": "NextJS to Vapi Call",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "vapi-call",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.vapi.ai/call",
+        "method": "POST",
+        "responseFormat": "json",
+        "headers": {
+          "Authorization": "Bearer 329d5fdc-ac52-43c6-a366-957f3b42b5dc",
+          "Content-Type": "application/json"
+        },
+        "bodyParametersJson": "={\n  \"to\": \"{{$json[\"phone\"]}}\",\n  \"agentId\": \"3423f3a6-ad77-4a15-bc2a-11a97a3cb79f\",\n  \"phoneId\": \"5045878e-430b-481b-838d-828a764897a2\",\n  \"metadata\": {\n    \"name\": \"{{$json[\"name\"]}}\"\n  }\n}"
+      },
+      "id": "2",
+      "name": "Vapi Outbound Call",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [550, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Vapi Outbound Call",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "id": "NextJS-Vapi-Workflow"
+}
