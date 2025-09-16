@@ -1,6 +1,8 @@
 "use client";
+import AIDemoModal from "@/components/AIDemoModal";
 import { motion } from "framer-motion";
 import { Phone, MessageSquare, CalendarCheck } from "lucide-react";
+import { useState } from "react";
 
 const steps = [
   {
@@ -27,6 +29,8 @@ const steps = [
 ];
 
 export default function HowItWorksSection() {
+    const [showModal, setShowModal] = useState(false);
+
   return (
     <section id="howitworks" className="py-20 relative overflow-hidden bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -157,6 +161,7 @@ export default function HowItWorksSection() {
 
         {/* CTA */}
         <motion.div
+        
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -167,6 +172,8 @@ export default function HowItWorksSection() {
             Ready to see it in action?
           </p>
           <motion.button
+                      onClick={() => setShowModal(true)}
+
             className="px-8 py-4 bg-gradient-to-r from-[#00FFFF] to-[#FF00FF] text-black font-bold rounded-full text-lg relative overflow-hidden"
             whileHover={{
               scale: 1.05,
@@ -184,6 +191,8 @@ export default function HowItWorksSection() {
           </motion.button>
         </motion.div>
       </div>
+            <AIDemoModal showModal={showModal} setShowModal={setShowModal} />
+
     </section>
   );
 }

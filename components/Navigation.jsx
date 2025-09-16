@@ -2,13 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Zap } from "lucide-react";
 
-const navItems = [
-  "Home",
-  "Features",
-  "How It Works",
-  "Testimonials",
-  "Contact",
-];
+const navItems = ["Home", "Features", "How It Works", "Testimonials", "Contact"];
 
 export default function Navigation({ onGetStartedClick }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,31 +34,22 @@ export default function Navigation({ onGetStartedClick }) {
             <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-[#00FFFF] to-[#00FF99] flex items-center justify-center">
               <Zap className="w-6 h-6 text-[#0a0a0a]" />
             </div>
-            <div className="flex flex-col">
-              <span className="text-lg font-bold bg-gradient-to-r from-[#00FFFF] to-[#00FF99] bg-clip-text text-transparent">
-                Rizvi Automation – AI Receptionist
-              </span>
-              <div className="h-0.5 bg-gradient-to-r from-[#00FFFF] to-[#00FF99] rounded-full" />
-            </div>
+            <span className="text-lg font-bold bg-gradient-to-r from-[#00FFFF] to-[#00FF99] bg-clip-text text-transparent">
+              Rizvi Automation
+            </span>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <motion.a
+              <a
                 key={item}
                 href={`#${item.toLowerCase().replace(/\s+/g, "")}`}
-                className="relative text-white/80 hover:text-[#00FFFF] transition-colors duration-300"
-                whileHover={{ scale: 1.1 }}
+                className="relative text-white/80 hover:text-[#00FFFF] transition-colors duration-300 group"
               >
                 {item}
-                <motion.div
-                  className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-[#00FFFF] to-[#00FF99]"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: "100%" }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.a>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00FFFF] to-[#00FF99] transition-all duration-300 group-hover:w-full" />
+              </a>
             ))}
           </div>
 
@@ -79,13 +64,7 @@ export default function Navigation({ onGetStartedClick }) {
               whileTap={{ scale: 0.95 }}
               onClick={onGetStartedClick}
             >
-              <span className="relative z-10">Book Demo</span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-[#00FFFF] to-[#FF00FF]"
-                initial={{ x: "100%" }}
-                whileHover={{ x: "0%" }}
-                transition={{ duration: 0.3 }}
-              />
+              📅 Book a Meeting
             </motion.button>
           </div>
 
@@ -113,27 +92,24 @@ export default function Navigation({ onGetStartedClick }) {
           >
             <div className="px-4 py-6 space-y-4">
               {navItems.map((item) => (
-                <motion.a
+                <a
                   key={item}
-                  href={`#${item.toLowerCase()}`}
+                  href={`#${item.toLowerCase().replace(/\s+/g, "")}`}
                   className="block text-lg text-white/80 hover:text-[#00FFFF] transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
-                  whileHover={{ x: 10 }}
                 >
                   {item}
-                </motion.a>
+                </a>
               ))}
-              <motion.button
+              <button
                 className="w-full px-6 py-3 mt-4 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-full text-black font-semibold"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
                 onClick={() => {
                   onGetStartedClick();
                   setMobileMenuOpen(false);
                 }}
               >
                 Book Demo
-              </motion.button>
+              </button>
             </div>
           </motion.div>
         )}

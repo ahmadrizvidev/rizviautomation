@@ -84,10 +84,11 @@ export default function CallToActionSection({ onBookDemoClick }) {
               boxShadow: "0 0 50px rgba(255, 0, 255, 0.8)",
             }}
             whileTap={{ scale: 0.95 }}
-            onClick={onBookDemoClick}
+            onClick={''}
           >
             <span className="relative z-10 flex items-center">
-              Book a Free Demo
+              
+             📅 Book a Meeting
               <ArrowRight className="w-6 h-6 ml-2" />
             </span>
             <motion.div

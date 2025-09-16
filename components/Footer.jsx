@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Zap, Linkedin, Github, Twitter } from "lucide-react";
+import { Zap /*, Linkedin, Github, Twitter */ } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -7,7 +7,7 @@ export default function Footer() {
       {/* Glowing Top Edge */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00FFFF] to-transparent opacity-50" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Left: Logo + Tagline */}
           <div className="space-y-4">
@@ -47,31 +47,20 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Right: Social Icons */}
+          {/* Right: Connect Section */}
           <div className="space-y-4">
             <h4 className="text-white font-semibold">Connect</h4>
-            <div className="flex space-x-4">
-              {[
-                { icon: Linkedin, href: "#", name: "LinkedIn" },
-                { icon: Github, href: "#", name: "GitHub" },
-                { icon: Twitter, href: "#", name: "Twitter" },
-              ].map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#1a1a1a] border border-[#00FFFF]/20 flex items-center justify-center text-white/60 hover:text-[#00FFFF] hover:border-[#00FFFF]/60 transition-all duration-300"
-                  whileHover={{
-                    scale: 1.1,
-                    boxShadow: "0 0 20px rgba(0, 255, 255, 0.3)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <social.icon size={18} />
-                </motion.a>
-              ))}
+            <div>
+              <motion.a
+                href="mailto:ahmad@rizviautomations.com"
+                className="text-white/70 hover:text-[#00FFFF] transition-colors text-sm underline-offset-2 hover:underline"
+                whileHover={{ x: 5 }}
+              >
+                ahmad@rizviautomations.com
+              </motion.a>
             </div>
+
+            {/* Commented out Social Icons */}
           </div>
         </div>
 
@@ -85,8 +74,8 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Background Glow Effect */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#00FFFF]/5 to-transparent opacity-20" />
+      {/* Background Glow Effect (non-interactive) */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#00FFFF]/5 to-transparent opacity-20 pointer-events-none" />
     </footer>
   );
 }
