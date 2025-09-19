@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 
-export default function CallToActionSection({ onBookDemoClick }) {
+export default function CallToActionSection() {
   const backgroundShapes = [
     {
       className:
@@ -68,27 +68,30 @@ export default function CallToActionSection({ onBookDemoClick }) {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-8">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-snug">
             <span className="bg-gradient-to-r from-[#00FFFF] via-[#00FF99] to-[#FF00FF] bg-clip-text text-transparent">
               Stop Missing Leads. Start Closing More Clients Today.
             </span>
           </h2>
-          <p className="text-xl text-white/80 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed">
             Ready to never miss another opportunity? Let our AI receptionist
             handle every call and booking while you focus on closing deals.
           </p>
-          <motion.button
-            className="px-12 py-5 bg-gradient-to-r from-[#FF00FF] via-[#00FFFF] to-[#00FF99] text-black font-bold rounded-full text-xl relative overflow-hidden"
+
+          {/* External Link CTA */}
+          <motion.a
+            href="https://calendly.com/rizviautomations/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-12 py-5 bg-gradient-to-r from-[#FF00FF] via-[#00FFFF] to-[#00FF99] text-black font-bold rounded-full text-xl relative overflow-hidden inline-block"
             whileHover={{
               scale: 1.05,
               boxShadow: "0 0 50px rgba(255, 0, 255, 0.8)",
             }}
             whileTap={{ scale: 0.95 }}
-            onClick={''}
           >
             <span className="relative z-10 flex items-center">
-              
-             📅 Book a Meeting
+              📅 Book a Meeting
               <ArrowRight className="w-6 h-6 ml-2" />
             </span>
             <motion.div
@@ -97,7 +100,7 @@ export default function CallToActionSection({ onBookDemoClick }) {
               whileHover={{ x: "0%" }}
               transition={{ duration: 0.3 }}
             />
-          </motion.button>
+          </motion.a>
         </motion.div>
       </div>
     </section>

@@ -4,7 +4,7 @@ import { Menu, X, Zap } from "lucide-react";
 
 const navItems = ["Home", "Features", "How It Works", "Testimonials", "Contact"];
 
-export default function Navigation({ onGetStartedClick }) {
+export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
@@ -55,17 +55,19 @@ export default function Navigation({ onGetStartedClick }) {
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <motion.button
-              className="px-6 py-3 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-full text-black font-semibold relative overflow-hidden"
+            <motion.a
+              href="https://calendly.com/rizviautomations/30min" // external link here
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-full text-black font-semibold relative overflow-hidden inline-block"
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 0 30px rgba(255, 0, 255, 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
-              onClick={onGetStartedClick}
             >
               📅 Book a Meeting
-            </motion.button>
+            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -101,15 +103,15 @@ export default function Navigation({ onGetStartedClick }) {
                   {item}
                 </a>
               ))}
-              <button
-                className="w-full px-6 py-3 mt-4 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-full text-black font-semibold"
-                onClick={() => {
-                  onGetStartedClick();
-                  setMobileMenuOpen(false);
-                }}
+              <a
+                href="https://calendly.com/rizviautomations/30min" // external link here
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full block text-center px-6 py-3 mt-4 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-full text-black font-semibold"
+                onClick={() => setMobileMenuOpen(false)}
               >
-                Book Demo
-              </button>
+                📅 Book a Meeting
+              </a>
             </div>
           </motion.div>
         )}

@@ -4,8 +4,8 @@ import { Check, X } from "lucide-react";
 
 export default function AIDemoModal({ showModal, setShowModal }) {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [consentChecked, setConsentChecked] = useState(false);
   const [demoType, setDemoType] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -20,7 +20,7 @@ export default function AIDemoModal({ showModal, setShowModal }) {
 
   const handleDemoSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !phoneNumber || !consentChecked || !demoType || loading) return;
+    if (!name || !email || !phoneNumber || !demoType || loading) return;
 
     const formattedNumber = formatPhoneNumber(phoneNumber);
     if (!/^\+1\d{10}$/.test(formattedNumber)) {
@@ -33,24 +33,26 @@ export default function AIDemoModal({ showModal, setShowModal }) {
       const response = await fetch("/api/test-vapi", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: formattedNumber, name, demoType }),
+        body: JSON.stringify({ phone: formattedNumber, name, email, demoType }),
       });
       await response.json();
 
-      // Show professional success message
-      setSuccessMessage("✅ Demo request submitted! Our AI receptionist will call you back in 10–30 seconds.");
+      // Professional B2B success message
+      setSuccessMessage(
+        "✅ Thank you! Your demo request has been received. Our AI receptionist will reach out within 30 seconds to showcase how this can benefit your business."
+      );
 
       // Clear form
       setName("");
+      setEmail("");
       setPhoneNumber("");
-      setConsentChecked(false);
       setDemoType("");
 
-      // Auto-hide modal after success message
+      // Auto-close modal after success message
       setTimeout(() => {
         setSuccessMessage("");
         setShowModal(false);
-      }, 4000); // 4 seconds
+      }, 4500);
     } catch (error) {
       console.error("Error submitting demo request:", error);
       alert("Something went wrong. Please try again.");
@@ -92,7 +94,8 @@ export default function AIDemoModal({ showModal, setShowModal }) {
                 </span>
               </h3>
               <p className="text-white/80 text-sm sm:text-base">
-                Add your phone number and our AI receptionist will call you back in 10–30 seconds.
+                Enter your details and our AI receptionist will call you back in
+                10–30 seconds.
               </p>
             </div>
 
@@ -100,7 +103,9 @@ export default function AIDemoModal({ showModal, setShowModal }) {
             <form onSubmit={handleDemoSubmit} className="space-y-4">
               {/* Demo Type */}
               <div>
-                <label className="block text-white/80 mb-2 text-sm">Choose Demo</label>
+                <label className="block text-white/80 mb-2 text-sm">
+                  Choose Demo
+                </label>
                 <div className="flex gap-3 flex-wrap">
                   {demoOptions.map((option) => (
                     <button
@@ -129,7 +134,17 @@ export default function AIDemoModal({ showModal, setShowModal }) {
                 required
               />
 
-              {/* Phone Number with +1 */}
+              {/* Email */}
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Business Email"
+                className="w-full px-4 py-3 bg-[#2a2a2a] border-2 border-[#00FFFF]/30 rounded-lg text-white focus:border-[#00FFFF] focus:outline-none transition-colors text-sm sm:text-base"
+                required
+              />
+
+              {/* Phone Number */}
               <div className="flex items-center">
                 <span className="px-3 py-3 bg-[#2a2a2a] border-2 border-r-0 border-[#00FFFF]/30 rounded-l-lg text-white text-sm sm:text-base">
                   +1
@@ -137,34 +152,34 @@ export default function AIDemoModal({ showModal, setShowModal }) {
                 <input
                   type="tel"
                   value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ""))}
+                  onChange={(e) =>
+                    setPhoneNumber(e.target.value.replace(/\D/g, ""))
+                  }
                   placeholder="Phone Number"
                   className="flex-1 px-4 py-3 bg-[#2a2a2a] border-2 border-l-0 border-[#00FFFF]/30 rounded-r-lg text-white focus:border-[#00FFFF] focus:outline-none transition-colors text-sm sm:text-base"
                   required
                 />
               </div>
 
-              {/* Consent */}
-              <label className="flex items-start space-x-2 text-white/80 text-xs sm:text-sm">
-                <input
-                  type="checkbox"
-                  checked={consentChecked}
-                  onChange={(e) => setConsentChecked(e.target.checked)}
-                  className="mt-1 w-4 h-4 text-[#00FFFF] bg-[#2a2a2a] border-[#00FFFF]/30 rounded focus:ring-[#00FFFF]"
-                  required
-                />
-                <span>I consent to share my info for the demo.</span>
-              </label>
-
               {/* Submit Button */}
               <motion.button
                 type="submit"
-                disabled={!name || !phoneNumber || !consentChecked || !demoType || loading}
+                disabled={!name || !email || !phoneNumber || !demoType || loading}
                 className="w-full py-3 bg-gradient-to-r from-[#00FFFF] to-[#00FF99] text-black font-bold rounded-lg text-sm sm:text-base"
-                whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(0, 255, 255, 0.5)" }}
+                whileHover={{
+                  scale: 1.02,
+                  boxShadow: "0 0 30px rgba(0, 255, 255, 0.5)",
+                }}
                 whileTap={{ scale: 0.98 }}
               >
-                {loading ? "Submitting..." : <span className="flex items-center justify-center"><Check className="w-4 h-4 mr-2" />Submit</span>}
+                {loading ? (
+                  "Submitting..."
+                ) : (
+                  <span className="flex items-center justify-center">
+                    <Check className="w-4 h-4 mr-2" />
+                    Submit
+                  </span>
+                )}
               </motion.button>
             </form>
 
